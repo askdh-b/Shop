@@ -16,3 +16,4 @@ rootProject.name = "Shop"
 include ':app'
 include ':core'
 include ':data_common'
+include ':data_storage'
