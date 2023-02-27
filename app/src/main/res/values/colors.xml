@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- common -->
+    <color name="transparent">#00FFFFFF</color>
+
+    <!-- text -->
+    <color name="dark_blue">#FF161826</color>
+    <color name="gray">#FF7B7B7B</color>
+    <color name="gray2">#FF808080</color>
+    <color name="white2">#FFEAEAEA</color>
+    <color name="blue2">#FF254FE6</color>
+
+    <!-- background -->
+    <color name="blue">#FF4E55D7</color>
+    <color name="light_gray">#FFE8E8E8</color>
 </resources>
