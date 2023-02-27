@@ -15,5 +15,9 @@ dependencyResolutionManagement {
 rootProject.name = "Shop"
 include ':app'
 include ':core'
+<<<<<<< HEAD
 include ':data_common'
 include ':data_storage'
+=======
+include ':data'
+>>>>>>> create data module
