@@ -12,8 +12,6 @@ android {
     defaultConfig {
         minSdk 16
         targetSdk 33
-
-        consumerProguardFiles "consumer-rules.pro"
     }
 }
 
@@ -25,9 +23,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     implementation "androidx.room:room-runtime:2.5.0"
+    implementation "androidx.room:room-ktx:2.5.0"
     kapt "androidx.room:room-compiler:2.5.0"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
 }
 
 kapt {

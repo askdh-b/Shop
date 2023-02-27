@@ -11,4 +11,10 @@ data class UserEntity(
     val lastName: String = String.empty(),
     val email: String = String.empty(),
     val password: String = String.empty()
-)
+) {
+
+    companion object {
+        const val TABLE_NAME = "Users"
+    }
+
+}
