@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import rustam.urazov.core.extension.empty
 import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.core.platform.BaseFragment
+import rustam.urazov.core.validation.ValidationResult
 import rustam.urazov.feature_sign_in.SignInViewModel
 import rustam.urazov.feature_sign_in.models.UserView
 import rustam.urazov.shop.R
@@ -36,14 +37,15 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 ))
             }
 
-            viewModel.emailValidationState.collectWhileStarted { error ->
-                when (error.isEmpty()) {
-                    true -> {
-                        etEmail.setBackgroundResource(R.drawable.view_sign_text_field)
-                    }
-                    false -> {
+            viewModel.emailValidationState.collectWhileStarted { state ->
+                when (state) {
+                    is ValidationResult.Invalid -> {
                         etEmail.setBackgroundResource(R.drawable.view_sign_text_field_error)
-                        tvEmail.text = error
+                        tvEmail.text = state.message
+                    }
+                    ValidationResult.Valid -> {
+                        etEmail.setBackgroundResource(R.drawable.view_sign_text_field)
+                        tvEmail.text = String.empty()
                     }
                 }
             }
