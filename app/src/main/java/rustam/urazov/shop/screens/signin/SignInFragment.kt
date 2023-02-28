@@ -2,22 +2,38 @@ package rustam.urazov.shop.screens.signin
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import rustam.urazov.core.extension.empty
+import rustam.urazov.feature_sign_in.SignInViewModel
+import rustam.urazov.feature_sign_in.models.UserView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.databinding.FragmentSignInBinding
 
+@AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private var viewBinding: FragmentSignInBinding? = null
-    private var viewModel: SignInViewModel? = null
+    private val viewModel by viewModels<SignInViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = FragmentSignInBinding.bind(view)
 
-        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
+        viewBinding?.etEmail?.addTextChangedListener {
+            viewModel.handleEmail(viewBinding?.etEmail?.text.toString())
+        }
 
+        viewBinding?.bSignIn?.setOnClickListener {
+            viewModel.signIn(UserView(
+                firstName = viewBinding?.etFirstName?.text.toString(),
+                lastName = viewBinding?.etLastName?.text.toString(),
+                email = viewBinding?.etEmail?.text.toString(),
+                password = String.empty()
+            ))
+        }
     }
 
 }

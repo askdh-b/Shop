@@ -10,18 +10,23 @@ import rustam.urazov.core.extension.empty
 import rustam.urazov.core.functional.fold
 import rustam.urazov.core.platform.BaseViewModel
 import rustam.urazov.data_common.model.User
+import rustam.urazov.feature_sign_in.models.UserView
+import rustam.urazov.feature_sign_in.models.map
+import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel(
+class SignInViewModel
+@Inject constructor(
     private val signIn: SignIn
-)  : BaseViewModel() {
+) : BaseViewModel() {
 
     private val mutableSignState: MutableStateFlow<Success> = MutableStateFlow(Success.Wait)
     val signState: StateFlow<Success> = mutableSignState.asStateFlow()
 
     private val mutableEmail: MutableStateFlow<String> = MutableStateFlow(String.empty())
     val email: StateFlow<String> = mutableEmail.asStateFlow()
-    private val mutableEmailValidationState: MutableStateFlow<String> = MutableStateFlow(String.empty())
+    private val mutableEmailValidationState: MutableStateFlow<String> =
+        MutableStateFlow(String.empty())
     val emailValidationState: StateFlow<String> = mutableEmailValidationState.asStateFlow()
 
     fun handleEmail(email: String) {
@@ -41,7 +46,7 @@ class SignInViewModel(
         return regex.containsMatchIn(email)
     }
 
-    fun signIn(user: User) = signIn(SignIn.Params(user), viewModelScope) {
+    fun signIn(user: UserView) = signIn(SignIn.Params(user.map()), viewModelScope) {
         it.fold(
             ::handleFailure,
             ::handleSuccess
