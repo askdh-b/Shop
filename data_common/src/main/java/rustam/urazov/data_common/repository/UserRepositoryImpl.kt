@@ -15,7 +15,7 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun signIn(user: User): Either<Failure, Success> =
         when (isExists(user.email)) {
             true -> Either.Left(Failure.MemoryError("This email address is already taken"))
-            false -> Either.Right(Success())
+            false -> Either.Right(Success.True)
         }
 
 

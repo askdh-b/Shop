@@ -16,23 +16,29 @@ class SignInViewModel(
     private val signIn: SignIn
 )  : BaseViewModel() {
 
-    private val mutableFirstName: MutableStateFlow<String> = MutableStateFlow(String.empty())
-    val firstName: StateFlow<String> = mutableFirstName.asStateFlow()
-    private val mutableLastName: MutableStateFlow<String> = MutableStateFlow(String.empty())
-    val lastName: StateFlow<String> = mutableLastName.asStateFlow()
+    private val mutableSignState: MutableStateFlow<Success> = MutableStateFlow(Success.Wait)
+    val signState: StateFlow<Success> = mutableSignState.asStateFlow()
+
     private val mutableEmail: MutableStateFlow<String> = MutableStateFlow(String.empty())
     val email: StateFlow<String> = mutableEmail.asStateFlow()
-
-    fun handleFirstName(firstName: String) {
-        mutableFirstName.value = firstName
-    }
-
-    fun handleLastName(lastName: String) {
-        mutableLastName.value = lastName
-    }
+    private val mutableEmailValidationState: MutableStateFlow<String> = MutableStateFlow(String.empty())
+    val emailValidationState: StateFlow<String> = mutableEmailValidationState.asStateFlow()
 
     fun handleEmail(email: String) {
         mutableEmail.value = email
+        handleEmailValidation(validateEmail(email))
+    }
+
+    private fun handleEmailValidation(isValid: Boolean) {
+        when (isValid) {
+            true -> mutableEmailValidationState.value = String.empty()
+            false -> mutableEmailValidationState.value = "Invalid email"
+        }
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        val regex = "^[A-Za-z0-9+_.-]+@(.+)\$".toRegex()
+        return regex.containsMatchIn(email)
     }
 
     fun signIn(user: User) = signIn(SignIn.Params(user), viewModelScope) {
@@ -43,7 +49,7 @@ class SignInViewModel(
     }
 
     private fun handleSuccess(success: Success) {
-
+        mutableSignState.value = success
     }
 
 }
