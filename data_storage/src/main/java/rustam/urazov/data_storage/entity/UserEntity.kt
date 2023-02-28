@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import rustam.urazov.core.extension.empty
 
-@Entity
+@Entity(tableName = UserEntity.TABLE_NAME)
 data class UserEntity(
     @PrimaryKey val userId: Int = 0,
     val firstName: String = String.empty(),
