@@ -1,3 +1,6 @@
 package rustam.urazov.core.exception
 
-class Success
+sealed class Success {
+    object Wait : Success()
+    object True : Success()
+}
