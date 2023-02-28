@@ -3,7 +3,6 @@ package rustam.urazov.core.validation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import rustam.urazov.core.extension.empty
 
 class Validate<T>(
     initialValue: T,
