@@ -11,7 +11,7 @@ sealed class Either<out L, out R> {
     fun <R> right(b: R) = Right(b)
 }
 
-fun <T, L, R> Either<L, R>.fold(fnL: (L) -> Any, fnR: (R) -> Any): Any =
+fun <L, R> Either<L, R>.fold(fnL: (L) -> Any, fnR: (R) -> Any): Any =
     when (this) {
         is Either.Left -> fnL(a)
         is Either.Right -> fnR(b)
