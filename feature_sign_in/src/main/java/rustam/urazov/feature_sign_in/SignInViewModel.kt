@@ -1,12 +1,20 @@
-package rustam.urazov.shop.screens.signin
+package rustam.urazov.feature_sign_in
 
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import rustam.urazov.core.exception.Success
 import rustam.urazov.core.extension.empty
+import rustam.urazov.core.functional.fold
 import rustam.urazov.core.platform.BaseViewModel
+import rustam.urazov.data_common.model.User
 
-class SignInViewModel : BaseViewModel() {
+@HiltViewModel
+class SignInViewModel(
+    private val signIn: SignIn
+)  : BaseViewModel() {
 
     private val mutableFirstName: MutableStateFlow<String> = MutableStateFlow(String.empty())
     val firstName: StateFlow<String> = mutableFirstName.asStateFlow()
@@ -25,6 +33,17 @@ class SignInViewModel : BaseViewModel() {
 
     fun handleEmail(email: String) {
         mutableEmail.value = email
+    }
+
+    fun signIn(user: User) = signIn(SignIn.Params(user), viewModelScope) {
+        it.fold(
+            ::handleFailure,
+            ::handleSuccess
+        )
+    }
+
+    private fun handleSuccess(success: Success) {
+
     }
 
 }
