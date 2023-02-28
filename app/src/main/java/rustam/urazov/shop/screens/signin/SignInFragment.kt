@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import rustam.urazov.core.extension.empty
 import rustam.urazov.feature_sign_in.SignInViewModel
@@ -20,6 +21,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewBinding = FragmentSignInBinding.bind(view)
 
         viewBinding?.etEmail?.addTextChangedListener {
@@ -33,6 +35,20 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 email = viewBinding?.etEmail?.text.toString(),
                 password = String.empty()
             ))
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.emailValidationState.collect { error ->
+                when (error.isEmpty()) {
+                    true -> {
+                        viewBinding?.etEmail?.setBackgroundResource(R.drawable.view_sign_text_field)
+                    }
+                    false -> {
+                        viewBinding?.etEmail?.setBackgroundResource(R.drawable.view_sign_text_field_error)
+                        viewBinding?.tvEmail?.text = error
+                    }
+                }
+            }
         }
     }
 
