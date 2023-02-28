@@ -37,7 +37,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 ))
             }
 
-            viewModel.emailValidationState.collectWhileStarted { state ->
+            viewModel.validateEmail.result.collectWhileStarted { state ->
                 when (state) {
                     is ValidationResult.Invalid -> {
                         etEmail.setBackgroundResource(R.drawable.view_sign_text_field_error)

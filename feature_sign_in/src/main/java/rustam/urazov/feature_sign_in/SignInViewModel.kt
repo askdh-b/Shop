@@ -10,6 +10,7 @@ import rustam.urazov.core.extension.empty
 import rustam.urazov.core.functional.fold
 import rustam.urazov.core.platform.BaseViewModel
 import rustam.urazov.core.platform.EmailRule
+import rustam.urazov.core.platform.LengthRule
 import rustam.urazov.core.validation.Validate
 import rustam.urazov.core.validation.ValidationResult
 import rustam.urazov.data_common.model.User
@@ -26,24 +27,15 @@ class SignInViewModel
     private val mutableSignState: MutableStateFlow<Success> = MutableStateFlow(Success.Wait)
     val signState: StateFlow<Success> = mutableSignState.asStateFlow()
 
-    private val mutableEmail: MutableStateFlow<String> = MutableStateFlow(String.empty())
-    val email: StateFlow<String> = mutableEmail.asStateFlow()
-
-    private val mutableEmailValidationState: MutableStateFlow<ValidationResult> =
-        MutableStateFlow(ValidationResult.Valid)
-    val emailValidationState: StateFlow<ValidationResult> = mutableEmailValidationState.asStateFlow()
+    val validateEmail = Validate.Builder<String>()
+        .addValue(String.empty())
+        .addRule(EmailRule())
+        .addRule(LengthRule(5, 90))
+        .build()
 
     fun handleEmail(email: String) {
-        mutableEmail.value = email
-
-        val validateEmail = Validate.Builder<String>()
-            .addValue(mutableEmail.value)
-            .addRule(EmailRule())
-            .build()
-
-        mutableEmailValidationState.value = validateEmail.validate()
+        validateEmail.update(email)
     }
-
 
     fun signIn(user: UserView) = signIn(SignIn.Params(user.map()), viewModelScope) {
         it.fold(
