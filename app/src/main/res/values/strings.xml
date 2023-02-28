@@ -1,3 +1,16 @@
 <resources>
+    <!-- common -->
     <string name="app_name">Shop</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="with_google">Sign in with Google</string>
+    <string name="with_apple">Sign in with Apple</string>
+
+    <!-- user -->
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+
+    <!-- action -->
+    <string name="sign_in">Sign in</string>
+    <string name="log_in">Log in</string>
 </resources>
