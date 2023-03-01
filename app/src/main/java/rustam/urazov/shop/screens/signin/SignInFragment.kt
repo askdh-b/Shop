@@ -50,7 +50,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                         firstName = etFirstName.text.toString(),
                         lastName = etLastName.text.toString(),
                         email = etEmail.text.toString(),
-                        password = String.empty()
+                        password = etPassword.text.toString()
                     )
                 )
             }
