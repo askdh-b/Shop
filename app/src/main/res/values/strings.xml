@@ -4,6 +4,7 @@
     <string name="have_account">Already have an account?</string>
     <string name="with_google">Sign in with Google</string>
     <string name="with_apple">Sign in with Apple</string>
+    <string name="welcome_back">Welcome back</string>
 
     <!-- user -->
     <string name="first_name">First name</string>
