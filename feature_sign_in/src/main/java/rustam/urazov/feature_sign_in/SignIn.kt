@@ -4,7 +4,7 @@ import rustam.urazov.core.exception.Failure
 import rustam.urazov.core.exception.Success
 import rustam.urazov.core.functional.Either
 import rustam.urazov.core.interactor.UseCase
-import rustam.urazov.data_common.model.User
+import rustam.urazov.data_common.model.UserModel
 import rustam.urazov.data_common.repository.UserRepository
 import javax.inject.Inject
 
@@ -14,6 +14,6 @@ class SignIn @Inject constructor(
 
     override suspend fun run(params: Params): Either<Failure, Success> = userRepository.signIn(params.user)
 
-    data class Params(val user: User)
+    data class Params(val user: UserModel)
 
 }
