@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import rustam.urazov.core.exception.Failure
 import rustam.urazov.core.extension.empty
 import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.core.platform.BaseFragment
@@ -69,6 +70,10 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             viewModel.validatePassword.result.collectWhileStarted { state ->
                 handleValidationResult(state, etPassword, tvPassword)
             }
+
+            viewModel.failure.collectWhileStarted { state ->
+                renderFailure(state)
+            }
         }
 
     }
@@ -104,5 +109,14 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     ) {
         editText.setBackgroundResource(resId)
         textView.text = text
+    }
+
+    private fun renderFailure(failure: Failure) {
+        when (failure) {
+            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            Failure.NoError -> {}
+            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+        }
     }
 }

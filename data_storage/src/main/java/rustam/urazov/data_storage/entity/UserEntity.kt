@@ -6,7 +6,7 @@ import rustam.urazov.core.extension.empty
 
 @Entity(tableName = UserEntity.TABLE_NAME)
 data class UserEntity(
-    @PrimaryKey val userId: Int = 0,
+    @PrimaryKey(autoGenerate = true) val userId: Int = 0,
     val firstName: String = String.empty(),
     val lastName: String = String.empty(),
     val email: String = String.empty(),

@@ -14,4 +14,8 @@
     <!-- action -->
     <string name="sign_in">Sign in</string>
     <string name="log_in">Log in</string>
+    <string name="ok">OK</string>
+    
+    <!-- error -->
+    <string name="connection_error">Please, check your network connection</string>
 </resources>

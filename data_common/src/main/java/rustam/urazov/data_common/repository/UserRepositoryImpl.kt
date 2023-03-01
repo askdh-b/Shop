@@ -4,6 +4,7 @@ import rustam.urazov.core.exception.Failure
 import rustam.urazov.core.exception.Success
 import rustam.urazov.core.functional.Either
 import rustam.urazov.data_common.model.User
+import rustam.urazov.data_common.model.map
 import rustam.urazov.data_storage.dao.UsersDao
 import rustam.urazov.data_storage.entity.UserEntity
 import javax.inject.Inject
@@ -15,7 +16,10 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun signIn(user: User): Either<Failure, Success> =
         when (isExists(user.email)) {
             true -> Either.Left(Failure.MemoryError("This email address is already taken"))
-            false -> Either.Right(Success.True)
+            false -> {
+                insertUser(user.map())
+                Either.Right(Success.True)
+            }
         }
 
 
@@ -26,5 +30,7 @@ class UserRepositoryImpl @Inject constructor(
         }
 
     private suspend fun getUsers(email: String): List<UserEntity> = usersDao.selectByEmail(email)
+
+    private suspend fun insertUser(user: UserEntity) = usersDao.insertUser(user)
 
 }
