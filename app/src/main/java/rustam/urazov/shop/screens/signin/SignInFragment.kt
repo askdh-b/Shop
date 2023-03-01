@@ -17,6 +17,7 @@ import rustam.urazov.feature_sign_in.SignInViewModel
 import rustam.urazov.feature_sign_in.models.UserView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.databinding.FragmentSignInBinding
+import rustam.urazov.shop.screens.login.LogInFragment
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
@@ -74,6 +75,13 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             viewModel.failure.collectWhileStarted { state ->
                 renderFailure(state)
             }
+
+            tvLogIn.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.flContainer, LogInFragment())
+                    .commitAllowingStateLoss()
+            }
+
         }
 
     }

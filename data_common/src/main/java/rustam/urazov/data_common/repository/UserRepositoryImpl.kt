@@ -44,7 +44,7 @@ class UserRepositoryImpl @Inject constructor(
     private suspend fun getUsersByEmail(email: String, firstName: String): List<UserEntity> =
         usersDao.selectByEmailOrFirstName(email, firstName)
 
-    private suspend fun auth(userAuth: UserAuthModel) = usersDao.auth(userAuth.map())
+    private suspend fun auth(userAuth: UserAuthModel) = usersDao.auth(userAuth.firstName, userAuth.password)
 
     private suspend fun insertUser(user: UserEntity) = usersDao.insertUser(user)
 
