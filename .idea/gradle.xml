@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/data_common" />
             <option value="$PROJECT_DIR$/data_storage" />
+            <option value="$PROJECT_DIR$/feature_log_in" />
             <option value="$PROJECT_DIR$/feature_sign_in" />
           </set>
         </option>
