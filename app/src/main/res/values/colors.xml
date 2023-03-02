@@ -15,9 +15,11 @@
     <color name="dark_blue">#FF161826</color>
     <color name="gray">#FF7B7B7B</color>
     <color name="gray2">#FF808080</color>
+    <color name="gray3">#FF3F3F3F</color>
     <color name="white2">#FFEAEAEA</color>
     <color name="blue2">#FF254FE6</color>
     <color name="red">#FFFF0000</color>
+    <color name="black2">#FF040402</color>
 
     <!-- background -->
     <color name="blue">#FF4E55D7</color>
