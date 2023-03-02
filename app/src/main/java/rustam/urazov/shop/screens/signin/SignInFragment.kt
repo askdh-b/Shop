@@ -5,10 +5,14 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import dagger.hilt.android.AndroidEntryPoint
 import rustam.urazov.core.exception.Failure
+import rustam.urazov.core.exception.Success
 import rustam.urazov.core.extension.empty
 import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.core.platform.BaseFragment
@@ -76,10 +80,33 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 renderFailure(state)
             }
 
+            viewModel.signState.collectWhileStarted { state ->
+                when (state) {
+                    Success.True -> findNavController().navigate(
+                        R.id.actionSignInToMain,
+                        null,
+                        navOptions {
+                            launchSingleTop = true
+                            popUpTo(R.id.nav_graph_shop) {
+                                inclusive = true
+                            }
+                        }
+                    )
+                    Success.Wait -> {}
+                }
+            }
+
             tvLogIn.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.flContainer, LogInFragment())
-                    .commitAllowingStateLoss()
+                findNavController().navigate(
+                    R.id.actionSignInToLogIn,
+                    null,
+                    navOptions {
+                        launchSingleTop = true
+                        popUpTo(R.id.nav_graph_shop) {
+                            inclusive = true
+                        }
+                    }
+                )
             }
 
         }
