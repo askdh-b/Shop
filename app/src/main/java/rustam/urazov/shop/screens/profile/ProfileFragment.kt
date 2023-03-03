@@ -20,10 +20,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             profilePhotoAdapterDelegate(),
             smallActionTextAdapterDelegate(),
             fullNameAdapterDelegate(),
-            actionButtonAdapterDelegate(),
+            actionButtonAdapterDelegate {},
             userActionWithDetailsAdapterDelegate(),
             userActionWithTextAdapterDelegate(),
-            userActionAdapterDelegate()
+            userActionAdapterDelegate {}
         )
 
         adapter.items = listOf(

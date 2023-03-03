@@ -44,12 +44,13 @@ fun fullNameAdapterDelegate() =
         }
     }
 
-fun actionButtonAdapterDelegate() =
+fun actionButtonAdapterDelegate(onClick: () -> Unit) =
     adapterDelegateViewBinding<User.ActionButton, User, LayoutButtonBinding>(
         { layoutInflater, parent ->
             LayoutButtonBinding.inflate(layoutInflater, parent, false)
         }
     ) {
+        binding.bUploadItem.setOnClickListener { onClick() }
         bind {
             binding.bUploadItem.setIconResource(item.icon)
             binding.bUploadItem.setText(item.text)
@@ -81,12 +82,13 @@ fun userActionWithTextAdapterDelegate() =
         }
     }
 
-fun userActionAdapterDelegate() =
+fun userActionAdapterDelegate(onClick: () -> Unit) =
     adapterDelegateViewBinding<User.UserAction, User, LayoutUserActionBinding>(
         { layoutInflater, parent ->
             LayoutUserActionBinding.inflate(layoutInflater, parent, false)
         }
     ) {
+        binding.root.setOnClickListener { onClick() }
         bind {
             binding.ivIcon.setImageResource(item.icon)
             binding.tvTitle.setText(item.title)

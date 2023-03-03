@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Shop.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:width">@dimen/m3_bottom_nav_item_active_indicator_height</item>
+        <item name="android:color">@color/item_indicator</item>
+    </style>
+</resources>
