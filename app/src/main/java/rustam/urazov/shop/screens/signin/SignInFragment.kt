@@ -146,11 +146,11 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private fun renderFailure(failure: Failure) {
         when (failure) {
-            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
-            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            Failure.ConnectionError -> notifyWithAction(requireView(), "Please, check your network connection", R.string.ok, { viewModel.close() }, R.color.action_button_text)
+            is Failure.MemoryError -> notifyWithAction(requireView(), failure.message, R.string.ok, { viewModel.close() }, R.color.action_button_text)
             Failure.NoError -> {}
-            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
-            else -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            is Failure.ServerError -> notifyWithAction(requireView(), failure.message, R.string.ok, { viewModel.close() }, R.color.action_button_text)
+            else -> notifyWithAction(requireView(), "Unexpected error", R.string.ok, { viewModel.close() }, R.color.action_button_text)
         }
     }
 }

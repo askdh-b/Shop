@@ -21,7 +21,7 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     fun notifyWithAction(
         view: View,
-        @StringRes message: Int,
+        message: String,
         @StringRes actionText: Int,
         action: () -> Any,
         @ColorRes color: Int,

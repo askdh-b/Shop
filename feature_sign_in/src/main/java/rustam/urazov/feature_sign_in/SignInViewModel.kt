@@ -71,6 +71,10 @@ class SignInViewModel
         }
     }
 
+    fun close() {
+        handleFailure(Failure.NoError)
+    }
+
     private fun validateAll(): Boolean =
         !(validateFirstName.result.value is ValidationResult.Invalid ||
                 validateLastName.result.value is ValidationResult.Invalid ||
