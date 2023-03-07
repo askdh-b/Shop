@@ -20,7 +20,7 @@ android {
 dependencies {
 
     implementation project(":core")
-    implementation project(":data_common")
+    implementation project(':data_user')
 
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"

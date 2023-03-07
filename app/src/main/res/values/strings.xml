@@ -32,4 +32,19 @@
     <!-- error -->
     <string name="connection_error">Please, check your network connection</string>
     <string name="profile">Profile</string>
+    
+    
+    
+    <string name="latest">Latest</string>
+    <string name="view_all">View all</string>
+    <string name="flash_sale">Flash Sale</string>
+    <string name="brands">Brands</string>
+    <string name="search">What are you looking for?</string>
+    <string name="phones">Phones</string>
+    <string name="headphones">Headphones</string>
+    <string name="games">Games</string>
+    <string name="cars">Cars</string>
+    <string name="furniture">Furniture</string>
+    <string name="kids">Kids</string>
+    <string name="products">Products</string>
 </resources>

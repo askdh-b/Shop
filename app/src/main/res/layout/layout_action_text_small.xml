@@ -10,7 +10,7 @@
         android:id="@+id/tvText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray2"
+        android:textColor="@color/profile_action_text_mini"
         android:textSize="8sp" />
 
 </LinearLayout>

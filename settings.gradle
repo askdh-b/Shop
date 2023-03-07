@@ -15,7 +15,11 @@ dependencyResolutionManagement {
 rootProject.name = "Shop"
 include ':app'
 include ':core'
-include ':data_common'
-include ':data_storage'
+include ':data_user'
+include ':data_user_storage'
 include ':feature_sign_in'
 include ':feature_log_in'
+include ':data_shop_network'
+include ':data_shop'
+include ':feature_products'
+include ':feature_product_details'

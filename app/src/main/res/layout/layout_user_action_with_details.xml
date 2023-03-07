@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -10,15 +11,25 @@
     android:paddingVertical="12dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivIcon"
+        android:id="@+id/ivActionEllipse"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/credit_card"
+        android:src="@drawable/ellipse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        tools:src="@drawable/credit_card"
+        app:layout_constraintBottom_toBottomOf="@id/ivActionEllipse"
+        app:layout_constraintEnd_toEndOf="@id/ivActionEllipse"
+        app:layout_constraintStart_toStartOf="@id/ivActionEllipse"
+        app:layout_constraintTop_toTopOf="@id/ivActionEllipse" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
@@ -27,11 +38,11 @@
         android:layout_gravity="center"
         android:layout_marginStart="6dp"
         android:layout_marginTop="2dp"
-        android:text="@string/full_name"
-        android:textColor="@color/black2"
+        tools:text="@string/full_name"
+        android:textColor="@color/profile_action_text"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:layout_constraintStart_toEndOf="@id/ivActionEllipse"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,6 @@ import rustam.urazov.feature_sign_in.SignInViewModel
 import rustam.urazov.feature_sign_in.models.UserView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.databinding.FragmentSignInBinding
-import rustam.urazov.shop.screens.login.LogInFragment
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
@@ -139,7 +137,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private fun setFieldState(
         editText: AppCompatEditText,
         textView: AppCompatTextView,
-        @DrawableRes resId: Int = R.drawable.view_sign_text_field,
+        @DrawableRes resId: Int = R.drawable.edit_text_background_e8e8e8_100_15dp_shape,
         text: String = String.empty()
     ) {
         editText.setBackgroundResource(resId)
@@ -148,10 +146,11 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private fun renderFailure(failure: Failure) {
         when (failure) {
-            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
-            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
             Failure.NoError -> {}
-            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            else -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
         }
     }
 }

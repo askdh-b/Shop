@@ -15,13 +15,14 @@
         android:layout_marginHorizontal="42dp"
         android:background="@drawable/view_sign_button"
         android:gravity="center_horizontal"
+        android:paddingVertical="8dp"
         android:text="@string/upload_item"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/white2"
+        android:textColor="@color/action_button_text"
         android:textSize="14sp"
         android:textStyle="bold"
         app:icon="@drawable/upload"
-        app:iconGravity="start" />
+        app:iconGravity="textStart" />
 
 </LinearLayout>

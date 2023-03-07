@@ -9,4 +9,9 @@
         android:name="rustam.urazov.shop.screens.profile.ProfileFragment"
         android:label="@string/profile" />
 
+    <fragment
+        android:id="@+id/fProducts"
+        android:name="rustam.urazov.shop.screens.products.ProductsFragment"
+        android:label="@string/products" />
+
 </navigation>

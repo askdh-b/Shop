@@ -1,5 +1,0 @@
-interface UserRepository {
-
-    fun signIn()
-
-}

@@ -27,6 +27,8 @@ dependencies {
     implementation project(":core")
     implementation project(":feature_sign_in")
     implementation project(":feature_log_in")
+    implementation project(":feature_products")
+    implementation project(":feature_product_details")
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2'
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
@@ -36,6 +38,8 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
 
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'

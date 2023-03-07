@@ -38,10 +38,11 @@ class LogInFragment : BaseFragment(R.layout.fragment_log_in) {
 
     private fun renderFailure(failure: Failure) {
         when (failure) {
-            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
-            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            Failure.ConnectionError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            is Failure.MemoryError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
             Failure.NoError -> {}
-            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.white2)
+            is Failure.ServerError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
+            Failure.UnexpectedError -> notifyWithAction(requireView(), R.string.connection_error, R.string.ok, {  }, R.color.action_button_text)
         }
     }
 
