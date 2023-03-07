@@ -1,7 +1,6 @@
 package rustam.urazov.shop.screens.favorites
 
-import rustam.urazov.core.platform.BaseFragment
+import androidx.fragment.app.Fragment
 import rustam.urazov.shop.R
 
-class FavoritesFragment : BaseFragment(R.layout.fragment_favorites) {
-}
+class FavoritesFragment : Fragment(R.layout.fragment_favorites)

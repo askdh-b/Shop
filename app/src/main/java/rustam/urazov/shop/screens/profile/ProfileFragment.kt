@@ -2,14 +2,14 @@ package rustam.urazov.shop.screens.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import rustam.urazov.core.extension.viewBinding
-import rustam.urazov.core.platform.BaseFragment
 import rustam.urazov.shop.R
 import rustam.urazov.shop.adapters.*
 import rustam.urazov.shop.databinding.FragmentProfileBinding
 
-class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewBinding by viewBinding { FragmentProfileBinding.bind(it) }
 

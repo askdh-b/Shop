@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import dagger.hilt.android.AndroidEntryPoint
-import rustam.urazov.core.exception.Failure
 import rustam.urazov.core.exception.Success
 import rustam.urazov.core.extension.empty
 import rustam.urazov.core.extension.viewBinding
@@ -25,7 +24,7 @@ import rustam.urazov.shop.databinding.FragmentSignInBinding
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private val viewBinding by viewBinding { FragmentSignInBinding.bind(it) }
-    private val viewModel by viewModels<SignInViewModel>()
+    override val viewModel by viewModels<SignInViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,13 +77,13 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 renderFailure(state)
             }
 
-            viewModel.signState.collectWhileStarted { state ->
-                when (state) {
+            viewModel.signState.collectWhileStarted {
+                when (it) {
                     Success.True -> findNavController().navigate(
                         R.id.actionSignInToMain,
                         null,
                         navOptions {
-                            launchSingleTop = true
+                            launchSingleTop = false
                             popUpTo(R.id.nav_graph_shop) {
                                 inclusive = true
                             }
@@ -144,13 +143,4 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         textView.text = text
     }
 
-    private fun renderFailure(failure: Failure) {
-        when (failure) {
-            Failure.ConnectionError -> notifyWithAction(requireView(), "Please, check your network connection", R.string.ok, { viewModel.close() }, R.color.action_button_text)
-            is Failure.MemoryError -> notifyWithAction(requireView(), failure.message, R.string.ok, { viewModel.close() }, R.color.action_button_text)
-            Failure.NoError -> {}
-            is Failure.ServerError -> notifyWithAction(requireView(), failure.message, R.string.ok, { viewModel.close() }, R.color.action_button_text)
-            else -> notifyWithAction(requireView(), "Unexpected error", R.string.ok, { viewModel.close() }, R.color.action_button_text)
-        }
-    }
 }

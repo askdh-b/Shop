@@ -15,4 +15,8 @@ abstract class BaseViewModel : ViewModel() {
         mutableFailure.value = failure
     }
 
+    fun close() {
+        handleFailure(Failure.NoError)
+    }
+
 }

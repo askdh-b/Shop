@@ -3,8 +3,11 @@ package rustam.urazov.shop.screens.login
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import dagger.hilt.android.AndroidEntryPoint
 import rustam.urazov.core.exception.Failure
+import rustam.urazov.core.exception.Success
 import rustam.urazov.core.platform.BaseFragment
 import rustam.urazov.feature_log_in.LogInViewModel
 import rustam.urazov.core.extension.viewBinding
@@ -16,7 +19,7 @@ import rustam.urazov.shop.databinding.FragmentLogInBinding
 class LogInFragment : BaseFragment(R.layout.fragment_log_in) {
 
     private val viewBinding by viewBinding { FragmentLogInBinding.bind(it) }
-    private val viewModel by viewModels<LogInViewModel>()
+    override val viewModel by viewModels<LogInViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,19 +33,25 @@ class LogInFragment : BaseFragment(R.layout.fragment_log_in) {
                 ))
             }
 
-            viewModel.failure.collectWhileStarted { state ->
-                renderFailure(state)
+            viewModel.failure.collectWhileStarted {
+                renderFailure(it)
             }
-        }
-    }
 
-    private fun renderFailure(failure: Failure) {
-        when (failure) {
-            Failure.ConnectionError -> notifyWithAction(requireView(), "Please, check your network connection", R.string.ok, {  }, R.color.action_button_text)
-            is Failure.MemoryError -> notifyWithAction(requireView(), failure.message, R.string.ok, {  }, R.color.action_button_text)
-            Failure.NoError -> {}
-            is Failure.ServerError -> notifyWithAction(requireView(), failure.message, R.string.ok, {  }, R.color.action_button_text)
-            else -> notifyWithAction(requireView(), "Unexpected error", R.string.ok, {  }, R.color.action_button_text)
+            viewModel.logState.collectWhileStarted {
+                when (it) {
+                    Success.True -> findNavController().navigate(
+                        R.id.actionLogInToMain,
+                        null,
+                        navOptions {
+                            launchSingleTop = true
+                            popUpTo(R.id.nav_graph_shop) {
+                                inclusive = true
+                            }
+                        }
+                    )
+                    Success.Wait -> {}
+                }
+            }
         }
     }
 

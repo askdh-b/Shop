@@ -1,7 +1,6 @@
 package rustam.urazov.shop.screens.products
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
@@ -21,7 +20,7 @@ import rustam.urazov.shop.databinding.FragmentProductsBinding
 class ProductsFragment : BaseFragment(R.layout.fragment_products) {
 
     private val viewBinding by viewBinding { FragmentProductsBinding.bind(it) }
-    private val viewModel by viewModels<ProductsViewModel>()
+    override val viewModel by viewModels<ProductsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,10 +36,6 @@ class ProductsFragment : BaseFragment(R.layout.fragment_products) {
         )
 
         with(viewBinding) {
-
-            val products: MutableList<Product> =
-                mutableListOf()
-
             viewModel.products.collectWhileStarted {
                 val latest = mutableListOf<ProductView.ProductWithoutSaleView>()
                 val flashSale = mutableListOf<ProductView.ProductOnSaleView>()
@@ -88,4 +83,5 @@ class ProductsFragment : BaseFragment(R.layout.fragment_products) {
             rvShop.adapter = adapter
         }
     }
+
 }
