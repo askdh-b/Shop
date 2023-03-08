@@ -12,4 +12,6 @@ interface UserRepository {
 
     suspend fun logIn(userAuth: UserAuthModel): Either<Failure, Success>
 
+    suspend fun logOut(user: String): Either<Failure, Success>
+
 }

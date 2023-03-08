@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import rustam.urazov.feature_sign_in.SignInViewModel
 import rustam.urazov.feature_sign_in.models.UserView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.databinding.FragmentSignInBinding
+import rustam.urazov.shop.screens.main.MainFragment
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
@@ -95,7 +97,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 when (it) {
                     Success.True -> findNavController().navigate(
                         R.id.actionSignInToMain,
-                        null,
+                        bundleOf(MainFragment.FIRST_NAME_KEY to etFirstName.text.toString()),
                         navOptions {
                             launchSingleTop = false
                             popUpTo(R.id.nav_graph_shop) {

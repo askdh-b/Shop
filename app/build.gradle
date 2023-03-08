@@ -29,6 +29,7 @@ dependencies {
     implementation project(":feature_log_in")
     implementation project(":feature_products")
     implementation project(":feature_product_details")
+    implementation project(":feature_profile")
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2'
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'

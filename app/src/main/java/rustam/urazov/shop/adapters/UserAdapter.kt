@@ -82,14 +82,14 @@ fun userActionWithTextAdapterDelegate() =
         }
     }
 
-fun userActionAdapterDelegate(onClick: () -> Unit) =
+fun userActionAdapterDelegate() =
     adapterDelegateViewBinding<User.UserAction, User, LayoutUserActionBinding>(
         { layoutInflater, parent ->
             LayoutUserActionBinding.inflate(layoutInflater, parent, false)
         }
     ) {
-        binding.root.setOnClickListener { onClick() }
         bind {
+            binding.root.setOnClickListener { item.onClick() }
             binding.ivIcon.setImageResource(item.icon)
             binding.tvTitle.setText(item.title)
         }
@@ -107,5 +107,5 @@ sealed class User {
         val text: String
     ) : User()
 
-    data class UserAction(@DrawableRes val icon: Int, @StringRes val title: Int) : User()
+    data class UserAction(@DrawableRes val icon: Int, @StringRes val title: Int, val onClick: () -> Unit) : User()
 }

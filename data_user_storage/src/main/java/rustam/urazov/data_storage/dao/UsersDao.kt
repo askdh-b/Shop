@@ -1,6 +1,7 @@
 package rustam.urazov.data_storage.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import rustam.urazov.data_storage.entity.UserEntity
@@ -16,5 +17,8 @@ interface UsersDao {
 
     @Insert
     suspend fun insertUser(userEntity: UserEntity)
+
+    @Query("DELETE FROM ${UserEntity.TABLE_NAME} WHERE firstName LIKE :firstName")
+    suspend fun deleteUser(firstName: String)
 
 }

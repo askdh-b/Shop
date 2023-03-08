@@ -29,6 +29,11 @@ class UserRepositoryImpl @Inject constructor(
             false -> Either.Left(Failure.MemoryError("Invalid firstname or password"))
         }
 
+    override suspend fun logOut(user: String): Either<Failure, Success> {
+        usersDao.deleteUser(user)
+        return Either.Right(Success.True)
+    }
+
     private suspend fun emailIsExists(email: String, firstName: String): Boolean =
         when (getUsersByEmailOrFirstName(email, firstName).size) {
             0 -> false
@@ -41,10 +46,14 @@ class UserRepositoryImpl @Inject constructor(
             else -> true
         }
 
-    private suspend fun getUsersByEmailOrFirstName(email: String, firstName: String): List<UserEntity> =
+    private suspend fun getUsersByEmailOrFirstName(
+        email: String,
+        firstName: String
+    ): List<UserEntity> =
         usersDao.selectByEmailOrFirstName(email, firstName)
 
-    private suspend fun auth(userAuth: UserAuthModel) = usersDao.auth(userAuth.firstName, userAuth.password)
+    private suspend fun auth(userAuth: UserAuthModel) =
+        usersDao.auth(userAuth.firstName, userAuth.password)
 
     private suspend fun insertUser(user: UserEntity) = usersDao.insertUser(user)
 

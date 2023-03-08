@@ -32,6 +32,10 @@
     <fragment
         android:id="@+id/fMain"
         android:name="rustam.urazov.shop.screens.main.MainFragment"
-        android:label="@string/main" />
+        android:label="@string/main">
+        <action
+            android:id="@+id/actionMainToSignIn"
+            app:destination="@id/fSignIn" />
+    </fragment>
 
 </navigation>

@@ -3,6 +3,7 @@ package rustam.urazov.shop.screens.login
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -14,6 +15,7 @@ import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.feature_log_in.models.UserAuthView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.databinding.FragmentLogInBinding
+import rustam.urazov.shop.screens.main.MainFragment
 
 @AndroidEntryPoint
 class LogInFragment : BaseFragment(R.layout.fragment_log_in) {
@@ -54,7 +56,7 @@ class LogInFragment : BaseFragment(R.layout.fragment_log_in) {
                 when (it) {
                     Success.True -> findNavController().navigate(
                         R.id.actionLogInToMain,
-                        null,
+                        bundleOf(MainFragment.FIRST_NAME_KEY to etFirstName.text.toString()),
                         navOptions {
                             launchSingleTop = true
                             popUpTo(R.id.nav_graph_shop) {
