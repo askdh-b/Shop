@@ -17,9 +17,9 @@
             <option value="$PROJECT_DIR$/data_user" />
             <option value="$PROJECT_DIR$/data_user_storage" />
             <option value="$PROJECT_DIR$/feature_log_in" />
+            <option value="$PROJECT_DIR$/feature_log_out" />
             <option value="$PROJECT_DIR$/feature_product_details" />
             <option value="$PROJECT_DIR$/feature_products" />
-            <option value="$PROJECT_DIR$/feature_profile" />
             <option value="$PROJECT_DIR$/feature_sign_in" />
           </set>
         </option>

@@ -1,6 +1,7 @@
 package rustam.urazov.shop.screens.signin
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
@@ -55,6 +56,19 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                         password = etPassword.text.toString()
                     )
                 )
+            }
+
+            ivEye.bringToFront()
+            ivEye.setOnClickListener {
+                if (etPassword.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD + InputType.TYPE_CLASS_TEXT) {
+                    etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD + InputType.TYPE_CLASS_TEXT
+                    etPassword.setSelection(etPassword.length())
+                    ivEye.setImageResource(R.drawable.eye_off_24)
+                } else if (etPassword.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD + InputType.TYPE_CLASS_TEXT) {
+                    etPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD + InputType.TYPE_CLASS_TEXT
+                    etPassword.setSelection(etPassword.length())
+                    ivEye.setImageResource(R.drawable.eye_24)
+                }
             }
 
             viewModel.validateFirstName.result.collectWhileStarted { state ->

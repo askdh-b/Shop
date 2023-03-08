@@ -3,11 +3,13 @@ package rustam.urazov.shop.screens.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.shop.R
 import rustam.urazov.shop.adapters.*
 import rustam.urazov.shop.databinding.FragmentProfileBinding
+import rustam.urazov.shop.screens.main.MainFragment
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -35,12 +37,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             User.UserActionWithDetails(R.drawable.credit_card, R.string.payment_method),
             User.UserActionWithText(R.drawable.credit_card, R.string.balance, "$1593"),
             User.UserActionWithDetails(R.drawable.credit_card, R.string.trade_history),
-            User.UserActionWithDetails(R.drawable.credit_card, R.string.restore_purchase),
-            User.UserAction(R.drawable.credit_card, R.string.help),
-            User.UserAction(R.drawable.credit_card, R.string.log_out),
+            User.UserActionWithDetails(R.drawable.refresh, R.string.restore_purchase),
+            User.UserAction(R.drawable.info, R.string.help),
+            User.UserAction(R.drawable.exit, R.string.log_out),
         )
 
         with(viewBinding) {
+            with(((parentFragment as NavHostFragment).parentFragment as MainFragment).viewBinding.tbMain) {
+                title = "Profile"
+                isTitleCentered = true
+            }
             rvUserProfile.adapter = adapter
         }
     }

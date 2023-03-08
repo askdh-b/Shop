@@ -3,6 +3,7 @@ package rustam.urazov.shop.screens.products
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import rustam.urazov.core.extension.viewBinding
@@ -15,6 +16,7 @@ import rustam.urazov.feature_products.model.ProductView
 import rustam.urazov.shop.R
 import rustam.urazov.shop.adapters.*
 import rustam.urazov.shop.databinding.FragmentProductsBinding
+import rustam.urazov.shop.screens.main.MainFragment
 
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment(R.layout.fragment_products) {
@@ -36,6 +38,12 @@ class ProductsFragment : BaseFragment(R.layout.fragment_products) {
         )
 
         with(viewBinding) {
+            with(((parentFragment as NavHostFragment).parentFragment as MainFragment).viewBinding.tbMain) {
+                title = "Trade by bata"
+                isTitleCentered = true
+                setCollapseIcon(R.mipmap.ic_user)
+            }
+
             viewModel.products.collectWhileStarted {
                 val latest = mutableListOf<ProductView.ProductWithoutSaleView>()
                 val flashSale = mutableListOf<ProductView.ProductOnSaleView>()

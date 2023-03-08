@@ -11,7 +11,7 @@ import rustam.urazov.shop.databinding.FragmentMainBinding
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewBinding by viewBinding { FragmentMainBinding.bind(it) }
+    val viewBinding by viewBinding { FragmentMainBinding.bind(it) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
