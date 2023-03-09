@@ -47,4 +47,7 @@
     <string name="furniture">Furniture</string>
     <string name="kids">Kids</string>
     <string name="products">Products</string>
+    <string name="favorites">Favorites</string>
+    <string name="basket">Basket</string>
+    <string name="chat">Chat</string>
 </resources>

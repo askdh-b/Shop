@@ -5,16 +5,18 @@ import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import rustam.urazov.feature_products.model.Brand
 import rustam.urazov.feature_products.model.Product
 import rustam.urazov.feature_products.model.ProductView
 import rustam.urazov.shop.R
+import rustam.urazov.shop.databinding.LayoutBrandsBinding
 import rustam.urazov.shop.databinding.LayoutCategoriesBinding
 import rustam.urazov.shop.databinding.LayoutFlashSaleBinding
 import rustam.urazov.shop.databinding.LayoutLatestBinding
 import rustam.urazov.shop.databinding.LayoutSearchBinding
+import rustam.urazov.shop.databinding.ViewBrandBinding
 import rustam.urazov.shop.databinding.ViewCategoryBinding
 import rustam.urazov.shop.databinding.ViewFlashSaleBinding
 import rustam.urazov.shop.databinding.ViewLatestBinding
@@ -64,6 +66,7 @@ fun latestProductsAdapterDelegate() =
         bind {
             (binding.rvLatest.adapter as ListDelegationAdapter<List<ProductView.ProductWithoutSaleView>>).apply {
                 items = item.latestProducts
+                notifyDataSetChanged()
             }
         }
     }
@@ -79,6 +82,27 @@ fun flashSaleProductsAdapterDelegate() =
         bind {
             (binding.rvFlashSale.adapter as ListDelegationAdapter<List<ProductView.ProductOnSaleView>>).apply {
                 items = item.flashSaleProducts
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+fun brandsAdapterDelegate() =
+    adapterDelegateViewBinding<Product.BrandSection, Product, LayoutBrandsBinding>(
+        { layoutInflater, parent ->
+            LayoutBrandsBinding.inflate(layoutInflater, parent, false).apply {
+                rvBrands.adapter = ListDelegationAdapter(brandAdapterDelegate())
+            }
+        }
+    ) {
+        bind {
+            (binding.rvBrands.adapter as ListDelegationAdapter<List<Brand.ProductBrand>>).apply {
+                items = listOf(
+                    Brand.ProductBrand("https://www.macmillandictionary.com/us/dictionary/american/gray_1"),
+                    Brand.ProductBrand("https://www.macmillandictionary.com/us/dictionary/american/gray_1"),
+                    Brand.ProductBrand("https://www.macmillandictionary.com/us/dictionary/american/gray_1")
+                )
+                notifyDataSetChanged()
             }
         }
     }
@@ -104,7 +128,7 @@ private fun latestProductAdapterDelegate() =
         bind {
             binding.tvLatestName.text = item.name
             binding.tvLatestCategory.text = item.category
-            binding.tvLatestPrice.text = item.price.toString()
+            binding.tvLatestPrice.text = "\$ ${item.price}"
             Glide
                 .with(binding.root.context)
                 .load(item.imageUrl)
@@ -126,8 +150,8 @@ private fun flashSaleProductAdapterDelegate() =
         bind {
             binding.tvFlashSaleProductName.text = item.name
             binding.tvFlashSaleCategory.text = item.category
-            binding.tvFlashSalePrice.text = item.price.toString()
-            binding.tvSale.text = item.discount.toString()
+            binding.tvFlashSalePrice.text = "\$ ${item.price}"
+            binding.tvSale.text = "${item.discount}% off"
             Glide
                 .with(binding.root.context)
                 .load(item.imageUrl)
@@ -140,7 +164,24 @@ private fun flashSaleProductAdapterDelegate() =
         }
     }
 
-
+private fun brandAdapterDelegate() =
+    adapterDelegateViewBinding<Brand.ProductBrand, Brand, ViewBrandBinding>(
+        { layoutInflater, parent ->
+            ViewBrandBinding.inflate(layoutInflater, parent, false)
+        }
+    ) {
+        bind {
+            Glide
+                .with(binding.root.context)
+                .load(item.imageUrl)
+                .transform(
+                    CenterCrop(),
+                    RoundedCorners(9)
+                )
+                .placeholder(R.drawable.placeholder_latest)
+                .into(binding.ivBrandIcon)
+        }
+    }
 
 sealed class Category {
     data class ProductCategory(@DrawableRes val icon: Int, @StringRes val title: Int) : Category()

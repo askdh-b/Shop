@@ -1,4 +1,4 @@
-package rustam.urazov.data_shop
+package rustam.urazov.data_shop_network
 
 import dagger.Module
 import dagger.Provides
@@ -10,15 +10,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import rustam.urazov.data_shop_network.adapterFactory.ShopCallAdapterFactory
 import rustam.urazov.data_shop_network.interceptor.ShopInterceptor
-import rustam.urazov.data_shop.repository.ProductRepository
-import rustam.urazov.data_shop.repository.ProductRepositoryImpl
-import rustam.urazov.data_shop_network.ShopApi
-import rustam.urazov.data_shop_network.ShopService
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ShopDataModule {
+class NetworkModule {
 
     companion object {
         private const val BASE_URL = "https://run.mocky.io/v3/"
@@ -45,13 +41,4 @@ class ShopDataModule {
 
         return okHttpClientBuilder.build()
     }
-
-    @Provides
-    @Singleton
-    fun provideProductRepository(productRepository: ProductRepositoryImpl): ProductRepository =
-        productRepository
-
-    @Provides
-    @Singleton
-    fun provideShopApi(shopService: ShopService): ShopApi = shopService
 }

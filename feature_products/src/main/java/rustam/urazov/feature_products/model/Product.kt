@@ -7,4 +7,9 @@ sealed class Product {
         Product()
     data class FlashSaleSection(val flashSaleProducts: List<ProductView.ProductOnSaleView>) :
         Product()
+    data class BrandSection(val brands: List<Brand.ProductBrand>) : Product()
+}
+
+sealed class Brand {
+    data class ProductBrand(val imageUrl: String) : Brand()
 }

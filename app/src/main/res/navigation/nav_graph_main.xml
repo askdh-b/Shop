@@ -5,13 +5,28 @@
     app:startDestination="@id/fProfile">
 
     <fragment
-        android:id="@+id/fProfile"
-        android:name="rustam.urazov.shop.screens.profile.ProfileFragment"
-        android:label="@string/profile" />
-
-    <fragment
         android:id="@+id/fProducts"
         android:name="rustam.urazov.shop.screens.products.ProductsFragment"
         android:label="@string/products" />
+
+    <fragment
+        android:id="@+id/fFavorites"
+        android:name="rustam.urazov.shop.screens.favorites.FavoritesFragment"
+        android:label="@string/favorites" />
+
+    <fragment
+        android:id="@+id/fBasket"
+        android:name="rustam.urazov.shop.screens.basket.BasketFragment"
+        android:label="@string/basket" />
+
+    <fragment
+        android:id="@+id/fChat"
+        android:name="rustam.urazov.shop.screens.chat.ChatFragment"
+        android:label="@string/chat" />
+
+    <fragment
+        android:id="@+id/fProfile"
+        android:name="rustam.urazov.shop.screens.profile.ProfileFragment"
+        android:label="@string/profile" />
 
 </navigation>

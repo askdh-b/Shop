@@ -1,13 +1,9 @@
 package rustam.urazov.shop.screens.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.navigation.ui.setupWithNavController
 import rustam.urazov.core.extension.viewBinding
 import rustam.urazov.shop.R

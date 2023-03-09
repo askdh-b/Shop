@@ -58,6 +58,7 @@
         android:background="@drawable/edit_text_background_e8e8e8_100_15dp_shape"
         android:gravity="center_horizontal"
         android:hint="@string/password"
+        android:inputType="textPassword"
         android:paddingVertical="10dp"
         android:textAlignment="center"
         android:textColorHint="@color/user_data_hint"

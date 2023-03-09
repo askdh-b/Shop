@@ -1,7 +1,9 @@
 package rustam.urazov.shop.screens.products
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
@@ -24,17 +26,29 @@ class ProductsFragment : BaseFragment(R.layout.fragment_products) {
     private val viewBinding by viewBinding { FragmentProductsBinding.bind(it) }
     override val viewModel by viewModels<ProductsViewModel>()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        if (savedInstanceState == null) {
+            viewModel.getLatest()
+            viewModel.getFlashSale()
+        }
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getLatest()
-        viewModel.getFlashSale()
 
         val adapter = ListDelegationAdapter(
             searchAdapterDelegate(),
             categoriesAdapterDelegate(),
             latestProductsAdapterDelegate(),
-            flashSaleProductsAdapterDelegate()
+            flashSaleProductsAdapterDelegate(),
+            brandsAdapterDelegate()
         )
 
         with(viewBinding) {
@@ -61,7 +75,8 @@ class ProductsFragment : BaseFragment(R.layout.fragment_products) {
                             Product.Search,
                             Product.CategorySection,
                             Product.LatestSection(latest.toList()),
-                            Product.FlashSaleSection(flashSale.toList())
+                            Product.FlashSaleSection(flashSale.toList()),
+                            Product.BrandSection(listOf())
                         )
                     )
                 }

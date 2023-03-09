@@ -35,7 +35,15 @@ class ProductsViewModel @Inject constructor(
     val products: StateFlow<List<ProductView>> = mutableProducts.asStateFlow()
 
     private val mutableProductsFinal: MutableStateFlow<List<Product>> =
-        MutableStateFlow(listOf(Product.Search, Product.CategorySection))
+        MutableStateFlow(
+            listOf(
+                Product.Search,
+                Product.CategorySection,
+                Product.LatestSection(listOf()),
+                Product.FlashSaleSection(listOf()),
+                Product.BrandSection(listOf())
+            )
+        )
     val productsFinal: StateFlow<List<Product>> = mutableProductsFinal.asStateFlow()
 
     fun set(products: List<Product>) {
@@ -43,11 +51,19 @@ class ProductsViewModel @Inject constructor(
     }
 
     fun setLatest(latest: List<ProductView.ProductWithoutSaleView>) {
-        mutableProducts.value = mutableProducts.value + latest
+        mutableProducts.value =
+            when (mutableProducts.value.containsAll(latest)) {
+                true -> mutableProducts.value
+                false -> mutableProducts.value + latest
+            }
     }
 
     fun setFlashSale(flashSale: List<ProductView.ProductOnSaleView>) {
-        mutableProducts.value = mutableProducts.value + flashSale
+        mutableProducts.value =
+            when (mutableProducts.value.containsAll(flashSale)) {
+                true -> mutableProducts.value
+                false -> mutableProducts.value + flashSale
+            }
     }
 
     fun getLatest() = getLatest(UseCase.None(), viewModelScope) {
