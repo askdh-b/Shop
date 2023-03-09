@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'rustam.urazov.core'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'com.google.android.material:material:1.8.0'
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+}
+
+kapt {
+    correctErrorTypes = true
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -10,6 +11,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/data_shop" />
+            <option value="$PROJECT_DIR$/data_shop_network" />
+            <option value="$PROJECT_DIR$/data_user" />
+            <option value="$PROJECT_DIR$/data_user_storage" />
+            <option value="$PROJECT_DIR$/feature_log_in" />
+            <option value="$PROJECT_DIR$/feature_product_details" />
+            <option value="$PROJECT_DIR$/feature_products" />
+            <option value="$PROJECT_DIR$/feature_profile" />
+            <option value="$PROJECT_DIR$/feature_sign_in" />
           </set>
         </option>
       </GradleProjectSettings>

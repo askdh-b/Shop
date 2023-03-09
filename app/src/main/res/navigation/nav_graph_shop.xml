@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_shop"
+    app:startDestination="@id/fSignIn">
+
+    <fragment
+        android:id="@+id/fSignIn"
+        android:name="rustam.urazov.shop.screens.signin.SignInFragment"
+        android:label="@string/sign_in">
+        <action
+            android:id="@+id/actionSignInToLogIn"
+            app:destination="@id/fLogIn" />
+        <action
+            android:id="@+id/actionSignInToMain"
+            app:destination="@+id/fMain"
+            app:popUpTo="@id/nav_graph_shop"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fLogIn"
+        android:name="rustam.urazov.shop.screens.login.LogInFragment"
+        android:label="@string/log_in">
+        <action
+            android:id="@+id/actionLogInToMain"
+            app:destination="@id/fMain"
+            app:popUpTo="@id/nav_graph_shop"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fMain"
+        android:name="rustam.urazov.shop.screens.main.MainFragment"
+        android:label="@string/main">
+        <action
+            android:id="@+id/actionMainToSignIn"
+            app:destination="@id/fSignIn" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,29 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'rustam.urazov.data_shop'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+    }
+}
+
+dependencies {
+
+    implementation project(":core")
+    implementation project(":data_shop_network")
+
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+}
+
+kapt {
+    correctErrorTypes = true
+}
